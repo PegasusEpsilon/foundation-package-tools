@@ -9,6 +9,12 @@ void die (const char *restrict const msg) {
 	exit(1);
 }
 
+__attribute__((cold, noreturn))
+void fail (const char *restrict const msg) {
+	perror(msg);
+	exit(1);
+}
+
 void debug (uint32_t nested, const char *restrict const fmt, ...) {
 	for (uint32_t i = 0; i < nested; i++) putchar('\t');
 	va_list args;
