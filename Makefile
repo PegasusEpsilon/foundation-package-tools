@@ -18,3 +18,6 @@ dismantle:	dismantle.c utils.o
 
 remantle:	remantle.c utils.o
 	$(CC) $(CFLAGS) $^ -o $@
+
+clean:
+	rm *.o dismantle remantle || true
