@@ -11,7 +11,10 @@ else
 	CFLAGS=$(FLAGS) -fmax-errors=3
 endif
 
-default:	dismantle
+default:	dismantle remantle
 
 dismantle:	dismantle.c utils.o
+	$(CC) $(CFLAGS) $^ -o $@
+
+remantle:	remantle.c utils.o
 	$(CC) $(CFLAGS) $^ -o $@
