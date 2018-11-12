@@ -65,6 +65,8 @@ int main (int argc, char **argv) {
 	printf("Package \"%s\" ", argv[1]);
 	FILE *pkg = fopen(argv[1], "r");
 
+	size_t read_bytes;
+	read_bytes = read_bytes;
 	int i;
 	for (i = 0; argv[1][i] && argv[1][i] != '.'; i++);
 	if (argv[1][i] == 0) die("filename must have an extension");
