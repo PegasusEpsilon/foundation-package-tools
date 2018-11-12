@@ -21,7 +21,7 @@ void extract_directory (uint32_t nested, FILE *pkg, uint32_t filedata_offset, ui
 		filename[filename_len] = 0;
 
 		// check if it's a directory
-		uint8_t directory; // is it?
+		bool directory; // is it?
 		fread(&directory, sizeof(directory), 1, pkg);
 		if (directory) { // it is
 			uint32_t dir_entries, skip_offset;
@@ -65,8 +65,6 @@ int main (int argc, char **argv) {
 	printf("Package \"%s\" ", argv[1]);
 	FILE *pkg = fopen(argv[1], "r");
 
-	size_t read_bytes;
-	read_bytes = read_bytes;
 	int i;
 	for (i = 0; argv[1][i] && argv[1][i] != '.'; i++);
 	if (argv[1][i] == 0) die("filename must have an extension");
