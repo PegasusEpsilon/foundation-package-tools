@@ -25,5 +25,5 @@ void debug (uint32_t nested, const char *restrict const fmt, ...) {
 
 void assert_fread (void *ptr, size_t size, size_t nmemb, FILE *stream) {
 	size_t read = fread(ptr, size, nmemb, stream);
-	if (read != size * nmemb) die("Read failed");
+	if (read != nmemb) die("Read failed");
 }
