@@ -1,8 +1,8 @@
 dismantle
-remantle
 engine
-engine.package
 game
+*.package
 packages
+remantle
 ui
 utils.o
