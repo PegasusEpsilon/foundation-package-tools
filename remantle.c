@@ -6,11 +6,11 @@
 #include <sys/types.h>	/* struct stat, stat(), opendir() */
 #include <sys/stat.h>	/* struct stat, stat() */
 #include <dirent.h> 	/* struct dirent, readdir() */
-#include <unistd.h> 	/* struct stat, stat(), chdir() */
+#include <unistd.h> 	/* struct stat, stat(), */
 #include <libgen.h> 	/* basename() */
 #include <string.h> 	/* strlen(), strcat() */
 
-#include "utils.h"  	/* die(), debug() */
+#include "utils.h"  	/* die(), debug(), fread(), chdir() */
 
 uint32_t build_index (FILE *pkg, off_t data_offset) {
 	struct stat statbuf;

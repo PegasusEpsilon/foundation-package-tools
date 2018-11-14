@@ -2,6 +2,7 @@
 #include <stdlib.h> 	/* exit() */
 #include <stdint.h> 	/* uint32_t */
 #include <stdarg.h> 	/* va_list, va_start(), vprintf(), va_end() */
+#include <unistd.h> 	/* chdir() */
 
 __attribute__((cold, noreturn))
 void die (const char *restrict const msg) {
@@ -24,6 +25,9 @@ void debug (uint32_t nested, const char *restrict const fmt, ...) {
 }
 
 void assert_fread (void *ptr, size_t size, size_t nmemb, FILE *stream) {
-	size_t read = fread(ptr, size, nmemb, stream);
-	if (read != nmemb) die("Read failed");
+	if (nmemb != fread(ptr, size, nmemb, stream)) die("read failed");
+}
+
+void assert_chdir (char *dir) {
+	if (chdir(dir)) die("chdir failed");
 }

@@ -1,13 +1,12 @@
-#include <stdio.h>  	/* fopen(), fread(), fseek(), ftell(), fclose(), printf() */
+#include <stdio.h>  	/* fopen(), fseek(), ftell(), fclose(), printf() */
 #include <stdlib.h> 	/* exit(), malloc(), free() */
 #include <stdint.h> 	/* uint32_t */
 #include <stdbool.h>	/* bool */
 #include <stdarg.h> 	/* va_list, va_start(), vprintf(), va_end() */
 #include <sys/stat.h>	/* mkdir() */
 #include <sys/types.h>	/* mkdir() */
-#include <unistd.h> 	/* chdir() */
 
-#include "utils.h"  	/* die(), debug() */
+#include "utils.h"  	/* die(), debug(), fread(), chdir() */
 
 void extract_directory (uint32_t nested, FILE *pkg, uint32_t filedata_offset, uint32_t entries) {
 	printf("contains %d files/directories\n", entries);

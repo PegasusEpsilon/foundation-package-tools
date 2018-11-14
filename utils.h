@@ -5,6 +5,9 @@
 #define mkdir(x, y) mkdir(x)
 #endif
 
+void assert_chdir(char *dir);
+#define chdir(x) assert_chdir(x)
+
 void assert_fread(void *ptr, size_t size, size_t nmemb, FILE *stream);
 #define fread(a, b, c, d) assert_fread(a, b, c, d)
 
