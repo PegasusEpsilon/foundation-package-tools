@@ -1,5 +1,5 @@
 # foundation-package-tools
-Unofficial tools to unpack (and soon repack) Foundation's .package files (https://www.polymorph.games/)
+Unofficial tools to unpack and repack Foundation's .package files (https://www.polymorph.games/)
 
 `$ dismantle <name>.package`
 
