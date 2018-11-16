@@ -63,7 +63,7 @@ void extract_directory (uint32_t nested, FILE *pkg, uint32_t filedata_offset, ui
 int main (int argc, char **argv) {
 	if (argc != 2) die("need a file to dismantle");
 	printf("Package \"%s\" ", argv[1]);
-	FILE *pkg = fopen(argv[1], "r");
+	FILE *pkg = fopen(argv[1], "rb");
 
 	int i;
 	for (i = 0; argv[1][i] && argv[1][i] != '.'; i++);
