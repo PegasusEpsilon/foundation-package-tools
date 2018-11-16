@@ -1,4 +1,4 @@
-#include <stdio.h>  	/* puts(), putchar() */
+#include <stdio.h>  	/* puts(), putchar(), fread() */
 #include <stdlib.h> 	/* exit() */
 #include <stdint.h> 	/* uint32_t */
 #include <stdarg.h> 	/* va_list, va_start(), vprintf(), va_end() */

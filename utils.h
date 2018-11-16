@@ -1,8 +1,9 @@
 #ifndef UTILS_H
 #define UTILS_H
 
-#ifdef _WIN32
-#define mkdir(x, y) mkdir(x)
+#if (defined(_WIN32) || defined(__WIN32__))
+#include <direct.h>
+#define mkdir(x, y) _mkdir(x)
 #endif
 
 void assert_chdir(char *dir);
