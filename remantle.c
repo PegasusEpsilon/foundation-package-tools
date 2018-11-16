@@ -18,7 +18,7 @@
 
 uint32_t pack (FILE *idx, FILE *dat, uint32_t nested) {
 	struct stat statbuf;
-	uint32_t file_count = 0, entry_count, subdir_file_count = 0;
+	uint32_t file_count = 0, entry_count = 0, subdir_file_count = 0;
 	DIR *dir = opendir(".");
 
 	// every directory entry in the newer format, including root directory
