@@ -16,7 +16,7 @@
 
 #define BLOCK 8192
 
-uint32_t pack (FILE *idx, FILE *dat, off_t data_offset, uint32_t nested) {
+uint32_t pack (FILE *idx, FILE *dat, uint32_t nested) {
 	struct stat statbuf;
 	uint32_t file_count = 0, entry_count, subdir_file_count = 0;
 	DIR *dir = opendir(".");
@@ -50,10 +50,14 @@ uint32_t pack (FILE *idx, FILE *dat, off_t data_offset, uint32_t nested) {
 			fclose(src);
 			chdir(entry->d_name);
 			fwrite("\1", sizeof(bool), 1, idx);
-			subdir_file_count += pack(idx, dat, data_offset, nested + 1);
+			subdir_file_count += pack(idx, dat, nested + 1);
 			chdir("..");
 			continue;
 		}
+		fwrite("\0", sizeof(bool), 1, idx);
+		size_t data_offset = ftell(dat);
+		fwrite((uint32_t *)&data_offset, sizeof(uint32_t), 1, idx);
+		fwrite((uint32_t *)&statbuf.st_size, sizeof(uint32_t), 1, idx);
 		size_t readbytes;
 		uint8_t buf[BLOCK];
 		do {
@@ -61,11 +65,7 @@ uint32_t pack (FILE *idx, FILE *dat, off_t data_offset, uint32_t nested) {
 			fwrite(buf, 1, readbytes, dat);
 		} while (BLOCK == readbytes);
 		fclose(src);
-		fwrite("\0", sizeof(bool), 1, idx);
-		fwrite((uint32_t *)&data_offset, sizeof(uint32_t), 1, idx);
-		fwrite((uint32_t *)&statbuf.st_size, sizeof(uint32_t), 1, idx);
 		debug(nested, "File: \"%s\" offset 0x%lX size %ld\n", entry->d_name, data_offset, statbuf.st_size);
-		data_offset += statbuf.st_size;
 		file_count++;
 	}
 	// fill in file count that we reserved earlier
@@ -111,8 +111,8 @@ int main (int argc, char **argv) {
 	// so our first entry offset is +4 +4 = 8
 	// and we skip fields to be populated later
 	fseek(pkg, 8, SEEK_SET);
-	uint32_t total_files = pack(pkg, tmp, 0, 0);
-	off_t data_offset = ftell(pkg);
+	uint32_t total_files = pack(pkg, tmp, 0);
+	size_t data_offset = ftell(pkg);
 
 	// copy temp file into the package
 	fseek(tmp, 0, SEEK_SET);
