@@ -7,6 +7,6 @@ Unofficial tools to unpack and repack Foundation's .package files (https://www.p
 
 `$ remantle <name>`
 
--> files are built from `<name>` into `<name>.package` (not fully implemented)
+-> files are built from `<name>` into `<name>.package`
 
 Both of these try to be sane and kind to the user. Please report all bugs and/or surprising results.
