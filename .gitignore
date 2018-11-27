@@ -2,6 +2,7 @@ dismantle
 engine
 game
 *.package
+*.log
 packages
 remantle
 ui
