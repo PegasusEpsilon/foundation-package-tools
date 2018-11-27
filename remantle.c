@@ -123,11 +123,9 @@ int main (int argc, char **argv) {
 		fwrite(buf, 1, readbytes, pkg);
 	} while (BLOCK == readbytes);
 	fclose(tmp);
-	close(tmpfd);
 	fseek(pkg, 0, SEEK_SET);
 	fwrite((uint32_t *)&data_offset, sizeof(uint32_t), 1, pkg);
 	fwrite(&total_files, sizeof(total_files), 1, pkg);
 	fclose(pkg);
-	fclose(tmp);
 	return 0;
 }
