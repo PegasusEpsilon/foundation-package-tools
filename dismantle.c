@@ -69,6 +69,13 @@ int main (int argc, char **argv) {
 	for (i = 0; argv[1][i] && argv[1][i] != '.'; i++);
 	if (argv[1][i] == 0) die("filename must have an extension");
 	argv[1][i] = 0;
+
+	struct stat statbuf;
+	if (0 == stat(argv[1], &statbuf)) {
+		printf("cannot be extracted, destination \"%s\"", argv[1]);
+		die(" already exists");
+	}
+
 	mkdir(argv[1], 0777);
 	chdir(argv[1]);
 
