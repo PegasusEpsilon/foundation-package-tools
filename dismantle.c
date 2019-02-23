@@ -67,7 +67,7 @@ int main (int argc, char **argv) {
 
 	int i;
 	for (i = 0; argv[1][i] && argv[1][i] != '.'; i++);
-	if (argv[1][i] == 0) die("filename must have an extension");
+	if (0 == argv[1][i]) die("must have an extension");
 	argv[1][i] = 0;
 
 	struct stat statbuf;
