@@ -1,7 +1,7 @@
 #define _POSIX_C_SOURCE 200112L
 #define _XOPEN_SOURCE 500
 #include <stdio.h>  	/* FILE, printf() */
-#include <stdlib.h> 	/* exit(), mkstemp() */
+#include <stdlib.h> 	/* mkstemp() */
 #include <stdint.h> 	/* uint32_t */
 #include <stdbool.h>	/* bool, true, false */
 #include <stdarg.h> 	/* va_list, va_start(), vprintf(), va_end() */

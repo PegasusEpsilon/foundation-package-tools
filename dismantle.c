@@ -1,5 +1,5 @@
 #include <stdio.h>  	/* fopen(), fseek(), ftell(), fclose(), printf() */
-#include <stdlib.h> 	/* exit(), malloc(), free() */
+#include <stdlib.h> 	/* malloc(), free() */
 #include <stdint.h> 	/* uint32_t */
 #include <stdbool.h>	/* bool */
 #include <stdarg.h> 	/* va_list, va_start(), vprintf(), va_end() */
