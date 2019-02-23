@@ -10,7 +10,7 @@
 #include <dirent.h> 	/* struct dirent, readdir() */
 #include <unistd.h> 	/* struct stat, stat(), */
 #include <libgen.h> 	/* basename() */
-#include <string.h> 	/* strlen(), strcat() */
+#include <string.h> 	/* strlen(), strcat(), strcpy() */
 
 #include "utils.h"  	/* die(), debug(), fread(), chdir() */
 
@@ -96,7 +96,8 @@ int main (int argc, char **argv) {
 
 	// mangle the filename into a temp file name
 	size_t len = strlen(filename);
-	for (size_t i = 1; i <= 6; i++) filename[len-i] = 'X';
+	// this replaces "x.package", created above, with "x.XXXXXX" -- always safe
+	strcpy(&filename[len-7], "XXXXXX");
 	// so we can make a temp file out of it
 	int tmpfd = mkstemp(filename);
 	unlink(filename); // early unlink, our buffer is now a ghost
