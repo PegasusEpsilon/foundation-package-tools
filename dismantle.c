@@ -45,7 +45,7 @@ void extract_directory (uint32_t nested, FILE *pkg, uint32_t filedata_offset, ui
 
 		fseek(pkg, offset + filedata_offset, SEEK_SET);
 
-		FILE *out = fopen(filename, "w");
+		FILE *out = fopen(filename, "wb");
 		free(filename); // memory churn don't care
 
 		char *buffer = malloc(length);
