@@ -25,7 +25,10 @@ void debug (uint32_t nested, const char *restrict const fmt, ...) {
 }
 
 void assert_fread (void *ptr, size_t size, size_t nmemb, FILE *stream) {
-	if (nmemb != fread(ptr, size, nmemb, stream)) fail("read failed");
+	if (
+		(size ? nmemb : 0)
+		!= fread(ptr, size, nmemb, stream)
+	) fail("read failed");
 }
 
 void assert_chdir (char *dir) {
