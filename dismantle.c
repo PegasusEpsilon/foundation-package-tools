@@ -64,6 +64,10 @@ int main (int argc, char **argv) {
 	if (argc != 2) die("need a file to dismantle");
 	printf("Package \"%s\" ", argv[1]);
 	FILE *pkg = fopen(argv[1], "rb");
+	if (NULL == pkg) {
+		fflush(stdout);
+		fail("failed to open");
+	}
 
 	int i;
 	for (i = 0; argv[1][i] && argv[1][i] != '.'; i++);
