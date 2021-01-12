@@ -24,7 +24,7 @@ uint32_t pack (FILE *idx, FILE *dat, uint32_t nested) {
 	// every directory entry in the newer format, including root directory
 	// starts with file count, so, reserve uint32_t for file count
 	// and fill it in at the end
-	int file_count_offset = ftell(idx);
+	long file_count_offset = ftell(idx);
 	fseek(idx, sizeof(uint32_t), SEEK_CUR);
 
 	// every directory except the root directory has a skip offset immediately
@@ -42,7 +42,7 @@ uint32_t pack (FILE *idx, FILE *dat, uint32_t nested) {
 		if (fstat(fileno(src), &statbuf))
 			fail("failed to stat() open filehandle");
 		entry_count++;
-		uint32_t len = strlen(entry->d_name);
+		size_t len = strlen(entry->d_name);
 		fwrite(&len, sizeof(len), 1, idx);
 		fwrite(entry->d_name, len, 1, idx);
 		if (S_ISDIR(statbuf.st_mode)) {
@@ -55,7 +55,7 @@ uint32_t pack (FILE *idx, FILE *dat, uint32_t nested) {
 			continue;
 		}
 		fwrite("\0", sizeof(bool), 1, idx);
-		size_t data_offset = ftell(dat);
+		long data_offset = ftell(dat);
 		fwrite((uint32_t *)&data_offset, sizeof(uint32_t), 1, idx);
 		fwrite((uint32_t *)&statbuf.st_size, sizeof(uint32_t), 1, idx);
 		size_t readbytes;
@@ -113,7 +113,7 @@ int main (int argc, char **argv) {
 	// and we skip fields to be populated later
 	fseek(pkg, 8, SEEK_SET);
 	uint32_t total_files = pack(pkg, tmp, 0);
-	size_t data_offset = ftell(pkg);
+	long data_offset = ftell(pkg);
 
 	// copy temp file into the package
 	fseek(tmp, 0, SEEK_SET);

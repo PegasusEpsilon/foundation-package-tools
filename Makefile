@@ -1,15 +1,16 @@
-CC=cc
-FLAGS=-Ofast -Wall -Wextra -Wshadow -Werror -ansi -pedantic -std=c99
+WARNINGS = -Wall -Wextra -Wshadow -Wconversion -Winline -Werror
 HEADERS=utils.h
 OBJECTS=utils.o
 DEPS=$(HEADERS) $(OBJECTS)
 
-ifeq ($(shell uname),Darwin)
-	CFLAGS=$(FLAGS)
-else
-	# clang no likey this flag
-	CFLAGS=$(FLAGS) -fmax-errors=3
+ifeq ($(shell $(CC) --version | awk 'NR == 1 { print $$1 }'),clang)
+FLAGS = -fsanitize=shift
+else # assume GCC
+WARNINGS += -Werror=format=0
+FLAGS = -fmax-errors=3
 endif
+
+CFLAGS=-Ofast -ansi -pedantic -std=c99 $(WARNINGS) $(FLAGS)
 
 default:	dismantle remantle
 
