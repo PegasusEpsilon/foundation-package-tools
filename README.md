@@ -1,3 +1,5 @@
+# DUE TO RECENT GITHUB POLICY CHANGES ALL MY PROJECTS HAVE BEEN MOVED TO [GITLAB](https://gitlab.com/pegasusepsilon)
+
 # foundation-package-tools
 Unofficial tools to unpack and repack Foundation's .package files (https://www.polymorph.games/)
 
